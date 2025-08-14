@@ -1,5 +1,3 @@
-# LEMP-on-AWS-EC2
-
 # LEMP Stack Implementation on AWS
 
 ## Overview
