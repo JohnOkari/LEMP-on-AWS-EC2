@@ -30,35 +30,24 @@ Before starting, ensure you have:
 ### Step 1: Launch an EC2 Instance
 - Log into the AWS Management Console to setup the EC2 Instance.
 ---
-![EC2-Dashboard](./images/a.PNG)
----
-- Search for **EC2  on the search bar**.
----
-![EC2 Search](./images/1a.PNG)
----
-- Click on Launch Instance.
----
-![EC2 Search](./images/1.PNG)
----
 - Enter the name of your web server
 ---
-![EC2 Name](./images/1b.PNG)
+![EC2 Name](./images/instance_name.png)
 ---
 - Choose **Ubuntu Server 22.04 LTS** (or latest version).
 ---
-![Ubuntu](./images/1c.PNG)
+![Ubuntu](./images/ubuntu_sever.PNG)
 - Select an **instance type** (e.g., t2.micro for free tier).
 ---
-![Instance-Type](./images/1e.PNG)
-- Configure **Security Group** to allow HTTP, HTTPS, SSH.
----
-![Instance-Type](./images/1h.PNG)
+![Instance-Type](./images/instance_type.PNG)
 ---
 - Launch and download the `.pem` key pair or use an already created key pair.
 ---
-![key pair](./images/1f.PNG)
+![key pair](./images/key_pair.PNG)
 ---
-![key pair 2](./images/1g.PNG)
+- Configure **Security Group** to allow HTTP, HTTPS, SSH.
+---
+![Instance-Type](./images/security_groups.PNG)
 ---
 - Configure the storage to what you prefer but we will leave everything default.
 ---
@@ -66,19 +55,19 @@ Before starting, ensure you have:
 ---
 - Scroll down and at your right, click on Launch Instance.
 ---
-![launch-instance](./images/1k.PNG)
+![launch-instance](./images/configure_storage.PNG)
 ---
 - You should see this if everything is successful
 ---
-![ec2-success](./images/1l.PNG)
+![ec2-success](./images/instance_launch.PNG)
 ---
 - Make sure the status checks are all checked ensuring that our instance has been launched and running
 ---
-![ec2-success](./images/2d.PNG)
+![ec2-success](./images/status_checks.PNG)
 ---
 - Now, copy the public IP Address of your instance
 ---
-![ec2-success](./images/2.PNG)
+![ec2-success](./images/copy_ip.PNG)
 ---
 - Another way to retrieve your IP Address is to use this command
 ```bash
@@ -87,16 +76,12 @@ Before starting, ensure you have:
 ### Step 2: Connect to Your Instance
 From your terminal, cd Downloads/:
 ```bash
-chmod 400 LEMP-stack-kp.pem
-ssh -i LEMP-stack-kp.pem ubuntu@<EC2_PUBLIC_IP>
+chmod 400 lemp-stack-kp.pem
+ssh -i lemp-stack-kp.pem ubuntu@<EC2_PUBLIC_IP>
 ```
-- Type `yes` 
----
-![ec2-success](./images/2b.PNG)
----
 - You're in when you see this
 ---
-![ssh-success](./images/2c.PNG)
+![ssh-success](./images/ubuntu_terminal.PNG)
 ---
 
 ### Step 3: Update the System
