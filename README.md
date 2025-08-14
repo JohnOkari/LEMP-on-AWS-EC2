@@ -105,11 +105,11 @@ sudo systemctl status nginx
 ```
 - You should see this if everything is well
 ---
-![nginx-success](./images/2g.png)
+![nginx-success](./images/nginx_status.png)
 ---
 - Test: Visit `http://<EC2_PUBLIC_IP>` in your browser.
 ---
-![nginx-webpage](./images/2oo.png)
+![nginx-webpage](./images/nginx_webpage.png)
 ---
 - Test: You can also test in your terminal with these commands
 ```bash
