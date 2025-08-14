@@ -51,11 +51,9 @@ Before starting, ensure you have:
 ---
 - Configure the storage to what you prefer but we will leave everything default.
 ---
-![configure-storage](./images/1j.png)
+![launch-instance](./images/configure_storage.png)
 ---
 - Scroll down and at your right, click on Launch Instance.
----
-![launch-instance](./images/configure_storage.png)
 ---
 - You should see this if everything is successful
 ---
