@@ -262,7 +262,7 @@ phpinfo();
 phttp://`server_domain_or_IP`/info.php
 ```
 - You should see this:
-![php-info](./images/4php_web_page.png)
+![php-info](./images/php_web_page.png)
 ---
 
 ### Step 10: Firewall Configuration (If Using UFW)
