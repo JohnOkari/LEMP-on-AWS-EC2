@@ -320,15 +320,9 @@ SHOW DATABASES;
 ```
 
 You should see output similar to:
-```
-+--------------------+
-| Database           |
-+--------------------+
-| example_database   |
-| information_schema |
-+--------------------+
-2 rows in set (0.000 sec)
-```
+---
+![ssh-success](./images/show_dbs.png)
+---
 
 Next, create a test table named `todo_list`. From the MySQL console, run:
 ```sql
@@ -352,18 +346,10 @@ To confirm that the data was successfully saved to your table, run:
 SELECT * FROM example_database.todo_list;
 ```
 
-You should see output similar to:
-```
-+---------+--------------------------+
-| item_id | content                  |
-+---------+--------------------------+
-|       1 | My first important item  |
-|       2 | My second important item |
-|       3 | My third important item  |
-|       4 | and this one more thing  |
-+---------+--------------------------+
-4 rows in set (0.000 sec)
-```
+You should see:
+---
+![ssh-success](./images/show_list.png)
+---
 
 After confirming that you have valid data in your test table, exit the MySQL console:
 ```sql
@@ -404,7 +390,10 @@ You can now access this page in your web browser by visiting your domain name or
 http://<EC2_PUBLIC_IP>/todo_list.php
 ```
 
-You should see a page titled "TODO" with a numbered list of the items you added to your database.
+You should see this
+---
+![ssh-success](./images/todo_list.png)
+---
 
 ---
 
