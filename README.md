@@ -150,9 +150,9 @@ sudo mysql_secure_installation
 ```
 - This will ask if you want to configure the `VALIDATE PASSWORD PLUGIN`, type y. If you answer y, you'll be asked to select a level of password validation :
 ---
-![mysql](./images/3b.png)
+![mysql](./images/mysql_secure.png)
 ---
-![mysql-validate-password](./images/4.png)
+![mysql-validate-password](./images/mysql_secure1.png)
 ---
 Test if you're able to log in by typing:
 ```bash
