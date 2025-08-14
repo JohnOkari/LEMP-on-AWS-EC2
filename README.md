@@ -235,7 +235,7 @@ Reload Nginx so these changes take effect:
 sudo systemctl reload nginx
 ```
 
-### Step 9: Test PHP Processing
+### Step 8: Test PHP Processing
 Create a test file for your empty web root:
 ```bash
 sudo echo 'Hello LEMP from hostname' $(TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` && curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` && curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectLEMP/index.html
@@ -265,7 +265,7 @@ phttp://`server_domain_or_IP`/info.php
 ![php-info](./images/php_web_page.png)
 ---
 
-### Step 10: Firewall Configuration (If Using UFW)
+### Step 9: Firewall Configuration (If Using UFW)
 ```bash
 sudo ufw allow OpenSSH
 sudo ufw allow 'Nginx Full'
@@ -274,7 +274,7 @@ sudo ufw enable
 
 ---
 
-### Step 11: Testing MySQL with PHP
+### Step 10: Testing MySQL with PHP
 Create a PHP file:
 ```bash
 sudo nano /var/www/projectLEMP/db_test.php
