@@ -36,38 +36,38 @@ Before starting, ensure you have:
 ---
 - Choose **Ubuntu Server 22.04 LTS** (or latest version).
 ---
-![Ubuntu](./images/ubuntu_sever.PNG)
+![Ubuntu](./images/ubuntu_sever.png)
 - Select an **instance type** (e.g., t2.micro for free tier).
 ---
-![Instance-Type](./images/instance_type.PNG)
+![Instance-Type](./images/instance_type.png)
 ---
 - Launch and download the `.pem` key pair or use an already created key pair.
 ---
-![key pair](./images/key_pair.PNG)
+![key pair](./images/key_pair.png)
 ---
 - Configure **Security Group** to allow HTTP, HTTPS, SSH.
 ---
-![Instance-Type](./images/security_groups.PNG)
+![Instance-Type](./images/security_groups.png)
 ---
 - Configure the storage to what you prefer but we will leave everything default.
 ---
-![configure-storage](./images/1j.PNG)
+![configure-storage](./images/1j.png)
 ---
 - Scroll down and at your right, click on Launch Instance.
 ---
-![launch-instance](./images/configure_storage.PNG)
+![launch-instance](./images/configure_storage.png)
 ---
 - You should see this if everything is successful
 ---
-![ec2-success](./images/instance_launch.PNG)
+![ec2-success](./images/instance_launch.png)
 ---
 - Make sure the status checks are all checked ensuring that our instance has been launched and running
 ---
-![ec2-success](./images/status_checks.PNG)
+![ec2-success](./images/status_checks.png)
 ---
 - Now, copy the public IP Address of your instance
 ---
-![ec2-success](./images/copy_ip.PNG)
+![ec2-success](./images/copy_ip.png)
 ---
 - Another way to retrieve your IP Address is to use this command
 ```bash
@@ -81,7 +81,7 @@ ssh -i lemp-stack-kp.pem ubuntu@<EC2_PUBLIC_IP>
 ```
 - You're in when you see this
 ---
-![ssh-success](./images/ubuntu_terminal.PNG)
+![ssh-success](./images/ubuntu_terminal.png)
 ---
 
 ### Step 3: Update the System
@@ -107,11 +107,11 @@ sudo systemctl status apache2
 ```
 - You should see this if everything is well
 ---
-![apache-success](./images/2g.PNG)
+![apache-success](./images/2g.png)
 ---
 - Test: Visit `http://<EC2_PUBLIC_IP>` in your browser.
 ---
-![apache-webpage](./images/2oo.PNG)
+![apache-webpage](./images/2oo.png)
 ---
 - Test: You can also test in your terminal with these commands
 ```bash
@@ -122,7 +122,7 @@ or
 curl http://127.0.0.1:80
 ```
 ---
-![apache-webpage](./images/2gg.PNG)
+![apache-webpage](./images/2gg.png)
 ---
 
 ### Step 5: Installing MySQL
@@ -134,7 +134,7 @@ Verify MySQL:
 sudo systemctl status mysql
 ```
 ---
-![mysql-status](./images/4a.PNG)
+![mysql-status](./images/4a.png)
 ---
 Log into mysql by typing this command
 ```bash
@@ -142,7 +142,7 @@ sudo mysql
 ```
 - You will see this:
 ---
-![mysql](./images/3a.PNG)
+![mysql](./images/3a.png)
 ---
 Set a password for root user using mysql_native_password as default authentication method:
 ```bash
@@ -158,9 +158,9 @@ sudo mysql_secure_installation
 ```
 - This will ask if you want to configure the `VALIDATE PASSWORD PLUGIN`, type y. If you answer y, you'll be asked to select a level of password validation :
 ---
-![mysql](./images/3b.PNG)
+![mysql](./images/3b.png)
 ---
-![mysql-validate-password](./images/4.PNG)
+![mysql-validate-password](./images/4.png)
 ---
 Test if you're able to log in by typing:
 ```bash
@@ -183,7 +183,7 @@ Check PHP version:
 ```bash
 php -v
 ```
-![mysql](./images/4b.PNG)
+![mysql](./images/4b.png)
 ---
 
 ### Step 7: Creating a Virtual Host for your website using Apache
@@ -280,7 +280,7 @@ phpinfo();
 ?>
 ```
 - You should see this:
-![mysql](./images/4e.PNG)
+![mysql](./images/4e.png)
 ---
 
 ### Step 10: Firewall Configuration (If Using UFW)
