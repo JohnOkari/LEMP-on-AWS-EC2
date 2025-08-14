@@ -272,32 +272,139 @@ sudo ufw enable
 
 ---
 
-### Step 10: Testing MySQL with PHP
-Create a PHP file:
+### Step 10: Create a Test Database and Configure Access
+
+In this step, you will create a test database with a simple "To do list" and configure access to it, so the Nginx website can query data from the database and display it.
+
+**Note:** At the time of this writing, the native MySQL PHP library `mysqlnd` doesn't support `caching_sha2_authentication`, the default authentication method for MySQL 8. We'll need to create a new user with the `mysql_native_password` authentication method to connect to the MySQL database from PHP.
+
+We will create a database named `example_database` and a user named `example_user`, but you can replace these names with different values.
+
+First, connect to the MySQL console using the root account:
 ```bash
-sudo nano /var/www/projectLEMP/db_test.php
+sudo mysql
 ```
-Example code:
+
+To create a new database, run the following command from your MySQL console:
+```sql
+CREATE DATABASE `example_database`;
+```
+
+Now create a new user and grant them full privileges on the database you have just created:
+```sql
+CREATE USER 'example_user'@'%' IDENTIFIED WITH mysql_native_password BY 'PassWord.1';
+```
+
+**Note:** Replace `PassWord.1` with a secure password of your own choosing.
+
+Now give this user permission over the `example_database` database:
+```sql
+GRANT ALL ON example_database.* TO 'example_user'@'%';
+```
+
+This will give the `example_user` full privileges over the `example_database` database, while preventing this user from creating or modifying other databases on your server.
+
+Exit the MySQL shell:
+```sql
+exit
+```
+
+Test if the new user has the proper permissions by logging in to the MySQL console using the custom user credentials:
+```bash
+mysql -u example_user -p
+```
+
+After logging in to the MySQL console, confirm that you have access to the `example_database` database:
+```sql
+SHOW DATABASES;
+```
+
+You should see output similar to:
+```
++--------------------+
+| Database           |
++--------------------+
+| example_database   |
+| information_schema |
++--------------------+
+2 rows in set (0.000 sec)
+```
+
+Next, create a test table named `todo_list`. From the MySQL console, run:
+```sql
+CREATE TABLE example_database.todo_list (
+    item_id INT AUTO_INCREMENT,
+    content VARCHAR(255),
+    PRIMARY KEY(item_id)
+);
+```
+
+Insert a few rows of content in the test table. You can repeat this command a few times with different values:
+```sql
+INSERT INTO example_database.todo_list (content) VALUES ("My first important item");
+INSERT INTO example_database.todo_list (content) VALUES ("My second important item");
+INSERT INTO example_database.todo_list (content) VALUES ("My third important item");
+INSERT INTO example_database.todo_list (content) VALUES ("and this one more thing");
+```
+
+To confirm that the data was successfully saved to your table, run:
+```sql
+SELECT * FROM example_database.todo_list;
+```
+
+You should see output similar to:
+```
++---------+--------------------------+
+| item_id | content                  |
++---------+--------------------------+
+|       1 | My first important item  |
+|       2 | My second important item |
+|       3 | My third important item  |
+|       4 | and this one more thing  |
++---------+--------------------------+
+4 rows in set (0.000 sec)
+```
+
+After confirming that you have valid data in your test table, exit the MySQL console:
+```sql
+exit
+```
+
+Now create a PHP script that will connect to MySQL and query for your content:
+```bash
+nano /var/www/projectLEMP/todo_list.php
+```
+
+Add the following PHP script that connects to the MySQL database and queries for the content of the `todo_list` table, displaying the results in a list:
 ```php
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "your_mysql_password";
+$user = "example_user";
+$password = "PassWord.1";
+$database = "example_database";
+$table = "todo_list";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password);
-
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+try {
+  $db = new PDO("mysql:host=localhost;dbname=$database", $user, $password);
+  echo "<h2>TODO</h2><ol>";
+  foreach($db->query("SELECT content FROM $table") as $row) {
+    echo "<li>" . $row['content'] . "</li>";
+  }
+  echo "</ol>";
+} catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
 }
-echo "Connected successfully";
 ?>
 ```
-Visit:
+
+Save and close the file when you are done editing.
+
+You can now access this page in your web browser by visiting your domain name or public IP address, followed by `/todo_list.php`:
 ```
-http://<EC2_PUBLIC_IP>/db_test.php
+http://<EC2_PUBLIC_IP>/todo_list.php
 ```
+
+You should see a page titled "TODO" with a numbered list of the items you added to your database.
 
 ---
 
