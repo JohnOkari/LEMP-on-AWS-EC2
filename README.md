@@ -119,9 +119,6 @@ or
 ```bash
 curl http://127.0.0.1:80
 ```
----
-![nginx-webpage](./images/2gg.png)
----
 
 ### Step 5: Installing MySQL
 ```bash
@@ -131,16 +128,13 @@ Verify MySQL:
 ```bash
 sudo systemctl status mysql
 ```
----
-![mysql-status](./images/4a.png)
----
 Log into mysql by typing this command
 ```bash
 sudo mysql
 ```
 - You will see this:
 ---
-![mysql](./images/3a.png)
+![mysql](./images/mysql.png)
 ---
 Set a password for root user using mysql_native_password as default authentication method:
 ```bash
