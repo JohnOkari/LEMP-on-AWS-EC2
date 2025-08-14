@@ -175,52 +175,10 @@ Check PHP version:
 ```bash
 php -v
 ```
-![php-version](./images/4b.png)
+![php-version](./images/php-v.png)
 ---
 
-### Step 7: Configure Nginx to work with PHP
-First, let's configure Nginx to work with PHP-FPM. Edit the default Nginx configuration:
-```bash
-sudo nano /etc/nginx/sites-available/default
-```
-
-Replace the content with:
-```nginx
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    root /var/www/html;
-    index index.php index.html index.htm index.nginx-debian.html;
-
-    server_name _;
-
-    location / {
-        try_files $uri $uri/ =404;
-    }
-
-    location ~ \.php$ {
-        include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
-    }
-
-    location ~ /\.ht {
-        deny all;
-    }
-}
-```
-
-Test the Nginx configuration:
-```bash
-sudo nginx -t
-```
-
-If the test is successful, reload Nginx:
-```bash
-sudo systemctl reload nginx
-```
-
-### Step 8: Create a Virtual Host for your website using Nginx
+### Step 7: Create a Virtual Host for your website using Nginx
 Create a directory for your website using `mkdir`. In our case:
 ```bash
 sudo mkdir /var/www/projectLEMP
@@ -240,7 +198,7 @@ server {
     listen 80;
     server_name projectLEMP www.projectLEMP;
     root /var/www/projectLEMP;
-    index index.php index.html index.htm;
+    index index.html index.htm index.php;
 
     location / {
         try_files $uri $uri/ =404;
@@ -280,7 +238,7 @@ sudo systemctl reload nginx
 ### Step 9: Test PHP Processing
 Create a test file for your empty web root:
 ```bash
-sudo echo 'Hello LEMP from hostname ' $(TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` && curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/metadata/public-hostname) 'with public IP' $(TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` && curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/metadata/public-ipv4) > /var/www/projectLEMP/index.html
+sudo echo 'Hello LEMP from hostname' $(TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` && curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"` && curl -H "X-aws-ec2-metadata-token: $TOKEN" -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectLEMP/index.html
 ```
 
 Visit:
@@ -299,8 +257,12 @@ Add this to the blank file:
 phpinfo();
 ?>
 ```
+- Access this page in your web browser by visiting the domain name or public IP address you’ve set up in your Nginx configuration file, followed by /info.php:
+```
+phttp://`server_domain_or_IP`/info.php
+```
 - You should see this:
-![php-info](./images/4e.png)
+![php-info](./images/4php_web_page.png)
 ---
 
 ### Step 10: Firewall Configuration (If Using UFW)
@@ -359,8 +321,4 @@ If you no longer need the setup:
 
 ---
 
-## 5. Architecture Diagram
-![LEMP AWS Architecture](LEMP_stack_architecture.png)
-
----
 **End of Guide**
